@@ -3,9 +3,7 @@
 #>Simple >Weighted >Exponential 
 #Do poprawnego dzialania programu wymagane sa biblioteki: 
 #>NumPy >matplotlib
-#Xt - dane
-# Średnia z pierwszych trzech
-#
+
 import matplotlib.pyplot as plt
 from os import system, name 
 from time import sleep 
@@ -70,7 +68,6 @@ def menu():
         Ye[0] = 0
         Ye[1] = 0
         Ye[2] = 0
-        
         while i < (x):
             xst[i] = ((xt[i-3] + xt[i-2] + xt[i-1])/3)
             Ys[i] = ((xt[i]-xst[i])/xt[i])
@@ -100,7 +97,6 @@ def menu():
         #EMA
         xet[i] = ((xet[i-1] + xet[i-2])/2)
         Ye[i] = ((Ye[i-2] + Ye[i-1]) / 2)
-
         i = 0
         print('       Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
         while i < (x):
@@ -108,12 +104,11 @@ def menu():
             i += 1
         print('         ','   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
         sleep(5)
-        plt.plot([])
-
+        #plt.plot([])
         print('Export do Excel?(T/N): ')
         xcl = input()
-        if xcl == Y:
-            sd
+        if xcl == 'Y':
+            clear()
         else:
             exit()
     elif op == 3:
