@@ -4,11 +4,11 @@
 #Do poprawnego dzialania programu wymagane sa biblioteki: 
 #>NumPy >matplotlib
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt  //Nie dziala//
 from os import system, name 
 from time import sleep 
 import random
-import xlwt
+#import xlwt //Nie działa//
 x = 0
 k = 1
 a = 1
@@ -16,7 +16,7 @@ b = 1
 def menu():
     clear()
     print('Projekt IZS')
-    print('1.Manualnie (obecnie opcja nie działa)')
+    print('1.Manualnie (obecnie opcja nie zaimplementowana)')
     print('2.Losowo')
     print('3.Zakoncz')
     op = int(input('Wybierz opcje: '))
