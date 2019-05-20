@@ -1,11 +1,10 @@
 #Projekt na cwiczenia z IZS
-#Movin Averages:
+#Srednie ruchome (Movin Averages):
+#>Proste >Wazone   >Eksponencjalne
 #>Simple >Weighted >Exponential 
 #Do poprawnego dzialania programu wymagane sa biblioteki: 
-#>matplotlib >xlwt 
-#zainstalowane za pomocą "easy_install"
+#>matplotlib >xlwt
 
-#from pandas import DataFrame
 import matplotlib.pyplot as plt
 from os import system, name 
 from time import sleep 
@@ -98,24 +97,77 @@ def main():
         xet[i] = ((xet[i-1] + xet[i-2])/2)
         Ye[i] = ((Ye[i-2] + Ye[i-1]) / 2)
         
-        Xs = [0] * (x+1)
+        Lp = [0] * (x+1)
         j = 0
         while j < (x+1):
-            Xs[j] = (j+1)
+            Lp[j] = (j+1)
+            j += 1
+        j = 0
+        XT = [0]*x
+        while j < (x):
+            XT[j] = (j+1)
             j += 1
         i = 0
-        print('       Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
+        print('     Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
         while i < (x):
             print('|   ',xt[i],'   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
             i += 1
         print('       ','   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
-        plt.plot(Xs,xst)
-        plt.plot(Xs,xwt)
-        plt.plot(Xs,xet)
+        i = 0
+        plt.plot(XT,xt,label='Xt')
+        plt.plot(Lp,xst,label='SMA')
+        plt.plot(Lp,xwt,label='WMA')
+        plt.plot(Lp,xet,label='EMA')
+        plt.xlabel('Lp')
+        plt.ylabel('Wartosc')
+        plt.title('Srednie Ruchome:')
+        plt.legend()
         plt.show()
         print('Export do Excel?(T/N): ')
         xcl = input()
-        if xcl == 'Y':
+        if xcl == 'T':
+            sheet = wb.add_sheet('Sheet')
+            sheet.write(0,0,'Lp')
+            sheet.write(0,1,'Xt')
+            sheet.write(0,2,'SMA')
+            sheet.write(0,3,'Ψs')
+            sheet.write(0,4,'WMA')
+            sheet.write(0,5,'Ψw')
+            sheet.write(0,6,'EMA')
+            sheet.write(0,7,'Ψe')
+            while i < (x+1):
+                sheet.write((i+1),0,Lp[i])
+                i += 1
+            i = 0
+            while i < (x):
+                sheet.write((i+1),1,xt[i])
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write((i+1),2,xst[i])
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write((i+1),3,Ys[i])
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write((i+1),4,xwt[i])
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write((i+1),5,Yw[i])
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write((i+1),6,xet[i])
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write((i+1),7,Ye[i])
+                i += 1
+            i = 0
+            wb.save('IZS.xls')
             clear()
         else:
             exit()
@@ -194,62 +246,77 @@ def main():
         xet[i] = ((xet[i-1] + xet[i-2])/2)
         Ye[i] = ((Ye[i-2] + Ye[i-1]) / 2)
         
-        Xs = [0] * (x+1)
+        Lp = [0] * (x+1)
         j = 0
         while j < (x+1):
-            Xs[j] = (j+1)
+            Lp[j] = (j+1)
+            j += 1
+        j = 0
+        XT = [0]*x
+        while j < (x):
+            XT[j] = (j+1)
             j += 1
         i = 0
-        print('       Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
+        print('     Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
         while i < (x):
             print('|   ',xt[i],'   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
             i += 1
         print('       ','   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
-        plt.plot(Xs,xst)
-        plt.plot(Xs,xwt)
-        plt.plot(Xs,xet)
+        i = 0
+        plt.plot(XT,xt,label='Xt')
+        plt.plot(Lp,xst,label='SMA')
+        plt.plot(Lp,xwt,label='WMA')
+        plt.plot(Lp,xet,label='EMA')
+        plt.xlabel('Lp')
+        plt.ylabel('Wartosc')
+        plt.title('Srednie Ruchome:')
+        plt.legend()
         plt.show()
         print('Export do Excel?(T/N): ')
         xcl = input()
         if xcl == 'T':
             sheet = wb.add_sheet('Sheet')
-            sheet.write(0,0,'Xt')
-            sheet.write(1,0,'SMA')
-            sheet.write(2,0,'Ψs')
-            sheet.write(3,0,'WMA')
-            sheet.write(4,0,'Ψw')
-            sheet.write(5,0,'EMA')
-            sheet.write(6,0,'Ψe')
-            i = 0
+            sheet.write(0,0,'Lp')
+            sheet.write(0,1,'Xt')
+            sheet.write(0,2,'SMA')
+            sheet.write(0,3,'Ψs')
+            sheet.write(0,4,'WMA')
+            sheet.write(0,5,'Ψw')
+            sheet.write(0,6,'EMA')
+            sheet.write(0,7,'Ψe')
             while i < (x+1):
-                sheet.write(0,i,Xs)
+                sheet.write((i+1),0,Lp[i])
+                i += 1
+            i = 0
+            while i < (x):
+                sheet.write((i+1),1,xt[i])
                 i += 1
             i = 0
             while i < (x+1):
-                sheet.write(1,i,xst)
+                sheet.write((i+1),2,xst[i])
                 i += 1
             i = 0
             while i < (x+1):
-                sheet.write(2,i,Ys)
+                sheet.write((i+1),3,Ys[i])
                 i += 1
             i = 0
             while i < (x+1):
-                sheet.write(3,i,xwt)
+                sheet.write((i+1),4,xwt[i])
                 i += 1
             i = 0
             while i < (x+1):
-                sheet.write(4,i,Yw)
+                sheet.write((i+1),5,Yw[i])
                 i += 1
             i = 0
             while i < (x+1):
-                sheet.write(5,i,xet)
+                sheet.write((i+1),6,xet[i])
                 i += 1
             i = 0
             while i < (x+1):
-                sheet.write(6,i,Ye)
+                sheet.write((i+1),7,Ye[i])
                 i += 1
             i = 0
-            wb.save('izs.xls')
+            wb.save('IZS.xls')
             clear()
 
         else:
