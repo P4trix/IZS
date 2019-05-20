@@ -4,19 +4,20 @@
 #Do poprawnego dzialania programu wymagane sa biblioteki: 
 #>NumPy >matplotlib
 
-#import matplotlib.pyplot as plt
+#from pandas import DataFrame
+import matplotlib.pyplot as plt
 from os import system, name 
 from time import sleep 
 import random
-#import xlwt //Nie działa//
+import xlwt
 x = 0
 k = 1
 a = 1
 b = 1
-def menu():
+def main():
     clear()
     print('Projekt IZS')
-    print('1.Manualnie (obecnie opcja nie zaimplementowana)')
+    print('1.Manualnie')
     print('2.Losowo')
     print('3.Zakoncz')
     op = int(input('Wybierz opcje: '))
@@ -29,7 +30,7 @@ def menu():
             xt[i] = int(input())
             i += 1
         clear()
-        k = float(input('Wpisz wartość k =  '))
+        k = float(input('Wpisz wartosc k =  '))
         clear()
         a = float(input('Wpisz wspolczynnik a =  '))
         clear()
@@ -107,7 +108,7 @@ def menu():
         if xcl == 'Y':
             clear()
         else:
-            exit(0)
+            exit()
     elif op == 2:
         x = int(input('Wpisz ile danych: '))
         xt = [0]*x
@@ -197,7 +198,7 @@ def menu():
         else:
             exit()
     elif op == 3:
-        exit(0)
+        exit()
     else:
         print('blad')
         sleep(2)
@@ -211,4 +212,4 @@ def clear():
     else: 
         _ = system('clear') 
 
-menu()
+main()
