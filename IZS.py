@@ -2,18 +2,20 @@
 #Movin Averages:
 #>Simple >Weighted >Exponential 
 #Do poprawnego dzialania programu wymagane sa biblioteki: 
-#>NumPy >matplotlib
+#>matplotlib >xlwt 
+#zainstalowane za pomocą "easy_install"
 
 #from pandas import DataFrame
 import matplotlib.pyplot as plt
 from os import system, name 
 from time import sleep 
 import random
-import xlwt
+from xlwt import Workbook
 x = 0
 k = 1
 a = 1
 b = 1
+wb = Workbook()
 def main():
     clear()
     print('Projekt IZS')
@@ -95,14 +97,22 @@ def main():
         #EMA
         xet[i] = ((xet[i-1] + xet[i-2])/2)
         Ye[i] = ((Ye[i-2] + Ye[i-1]) / 2)
+        
+        Xs = [0] * (x+1)
+        j = 0
+        while j < (x+1):
+            Xs[j] = (j+1)
+            j += 1
         i = 0
-        print('     Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
+        print('       Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
         while i < (x):
             print('|   ',xt[i],'   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
             i += 1
         print('       ','   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
-        sleep(5)
-        #plt.plot([])
+        plt.plot(Xs,xst)
+        plt.plot(Xs,xwt)
+        plt.plot(Xs,xet)
+        plt.show()
         print('Export do Excel?(T/N): ')
         xcl = input()
         if xcl == 'Y':
@@ -183,18 +193,65 @@ def main():
         #EMA
         xet[i] = ((xet[i-1] + xet[i-2])/2)
         Ye[i] = ((Ye[i-2] + Ye[i-1]) / 2)
+        
+        Xs = [0] * (x+1)
+        j = 0
+        while j < (x+1):
+            Xs[j] = (j+1)
+            j += 1
         i = 0
         print('       Xt         SMA            Ψs           WMA           Ψw           EMA           Ψe')
         while i < (x):
             print('|   ',xt[i],'   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
             i += 1
         print('       ','   |   ',"%.2f" % xst[i],'   |   ',"%.2f" % Ys[i],'   |   ',"%.2f" % xwt[i],'   |   ',"%.2f" % Yw[i],'   |   ',"%.2f" % xet[i],'   |   ',"%.2f" % Ye[i],'   |   ')
-        sleep(5)
-        #plt.plot([])
+        plt.plot(Xs,xst)
+        plt.plot(Xs,xwt)
+        plt.plot(Xs,xet)
+        plt.show()
         print('Export do Excel?(T/N): ')
         xcl = input()
-        if xcl == 'Y':
+        if xcl == 'T':
+            sheet = wb.add_sheet('Sheet')
+            sheet.write(0,0,'Xt')
+            sheet.write(1,0,'SMA')
+            sheet.write(2,0,'Ψs')
+            sheet.write(3,0,'WMA')
+            sheet.write(4,0,'Ψw')
+            sheet.write(5,0,'EMA')
+            sheet.write(6,0,'Ψe')
+            i = 0
+            while i < (x+1):
+                sheet.write(0,i,Xs)
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write(1,i,xst)
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write(2,i,Ys)
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write(3,i,xwt)
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write(4,i,Yw)
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write(5,i,xet)
+                i += 1
+            i = 0
+            while i < (x+1):
+                sheet.write(6,i,Ye)
+                i += 1
+            i = 0
+            wb.save('izs.xls')
             clear()
+
         else:
             exit()
     elif op == 3:
@@ -205,10 +262,10 @@ def main():
         clear()
 
 def clear(): 
-    # for windows 
+    #windows 
     if name == 'nt': 
         _ = system('cls') 
-    # for mac and linux 
+    #mac and linux 
     else: 
         _ = system('clear') 
 
