@@ -1,5 +1,5 @@
 #Projekt na cwiczenia z IZS
-#Srednie ruchome (Movin Averages):
+#Srednie ruchome (Moving Averages):
 #>Proste >Wazone   >Eksponencjalne
 #>Simple >Weighted >Exponential 
 #Do poprawnego dzialania programu wymagane sa biblioteki: 
